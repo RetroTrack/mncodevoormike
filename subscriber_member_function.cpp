@@ -40,78 +40,74 @@ private:
     RCLCPP_INFO(this->get_logger(), "Recieved: '%s'", msg.data.c_str());
     convert_to_art(msg.data.c_str());
   }
-  
-  void convert_to_art(std::string recieved_time) const {
-    std::string num0[5] = {
-      "█████",
-      "█   █",
-      "█   █",
-      "█   █",
-      "█████"
+
+  static void convert_to_art(const std::string &received_time) {
+    std::string digits[10][5] = {
+      {
+        "█████",
+        "█   █",
+        "█   █",
+        "█   █",
+        "█████"
+      },
+      {
+        "    █",
+        "    █",
+        "    █",
+        "    █",
+        "    █"
+      },
+      {
+        " ███ ",
+        "    █",
+        " ███ ",
+        "█    ",
+        " ███ "
+      },
+      {
+        "████ ",
+        "    █",
+        "████ ",
+        "    █",
+        "████ "
+      },
+      {
+        "█   █",
+        "█   █",
+        "█████",
+        "    █",
+        "    █"
+      },
+      {
+        " ███ ",
+        "█    ",
+        " ███ ",
+        "    █",
+        " ███ "
+      },
+      {
+        " ███ ",
+        "█    ",
+        " ███ ",
+        "█   █",
+        " ███ "
+      },
+      {
+        " ███ ",
+        "█   █",
+        " ███ ",
+        "█   █",
+        " ███ "
+      },
+      {
+        " ███ ",
+        "█   █",
+        " ███ ",
+        "    █",
+        " ███ "
+      }
     };
-    std::string num1[5] = {
-      "    █",
-      "    █",
-      "    █",
-      "    █",
-      "    █"
-    };
-    std::string num2[5] = {
-      " ███ ",
-      "    █",
-      " ███ ",
-      "█    ",
-      " ███ "
-    };
-    std::string num3[5] = {
-      "████ ",
-      "    █",
-      "████ ",
-      "    █",
-      "████ "
-    };
-    std::string num4[5] = {
-      "█   █",
-      "█   █",
-      "█████",
-      "    █",
-      "    █"
-    };
-    std::string num5[5] = {
-      " ███ ",
-      "█    ",
-      " ███ ",
-      "    █",
-      " ███ "
-    };
-    std::string num6[5] = {
-      " ███ ",
-      "█    ",
-      " ███ ",
-      "█   █",
-      " ███ "
-    };
-    std::string num7[5] = {
-      "████ ",
-      "    █",
-      "    █",
-      "    █",
-      "    █"
-    };
-    std::string num8[5] = {
-      " ███ ",
-      "█   █",
-      " ███ ",
-      "█   █",
-      " ███ "
-    };
-    std::string num9[5] = {
-      " ███ ",
-      "█   █",
-      " ███ ",
-      "    █",
-      " ███ "
-    };
+
     std::string colon[5] = {
       "     ",
       "  █  ",
@@ -132,38 +128,11 @@ private:
     {
       for (int i = 0; i < 5; i++)
       {
-        if(recieved_time[i] == '0') {
-          lines[line] += num0[line];
-        }
-        if(recieved_time[i] == '1') {
-          lines[line] += num1[line];
-        }
-        if(recieved_time[i] == '2') {
-          lines[line] += num2[line];
-        }
-        if(recieved_time[i] == '3') {
-          lines[line] += num3[line];
-        }
-        if(recieved_time[i] == '4') {
-          lines[line] += num4[line];
-        }
-        if(recieved_time[i] == '5') {
-          lines[line] += num5[line];
-        }
-        if(recieved_time[i] == '6') {
-          lines[line] += num6[line];
-        }
-        if(recieved_time[i] == '7') {
-          lines[line] += num7[line];
-        }
-        if(recieved_time[i] == '8') {
-          lines[line] += num8[line];
-        }
-        if(recieved_time[i] == '9') {
-          lines[line] += num9[line];
-        }
-        if(recieved_time[i] == ':') {
-          lines[line] += colon[line];
+        if (received_time[i] >= '0' && received_time[i] <= '9') {
+          const int digit = received_time[i] - '0';
+          lines[line] += digits[digit][line];
+        }else if(received_time[i] == ':') {
+          lines[line] += digits[0][line];
         }
         lines[line] += " ";
       }
