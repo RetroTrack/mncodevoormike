@@ -93,6 +93,13 @@ private:
         " ███ "
       },
       {
+        "████ ",
+        "    █",
+        "    █",
+        "    █",
+        "    █"
+      },
+      {
         " ███ ",
         "█   █",
         " ███ ",
@@ -132,11 +139,11 @@ private:
           const int digit = received_time[i] - '0';
           lines[line] += digits[digit][line];
         }else if(received_time[i] == ':') {
-          lines[line] += digits[0][line];
+          lines[line] += colon[line];
         }
         lines[line] += " ";
       }
-      std::cout << lines[0] << std::endl;
+      std::cout << lines[line] << std::endl;
     }
     
 
